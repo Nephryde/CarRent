@@ -4,136 +4,22 @@ using CarRent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRent.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181122151503_Dodanie tabeli Zatrudnienie, rodzaj zatrudnieia, warsztat i urlop")]
+    partial class DodanietabeliZatrudnienierodzajzatrudnieiawarsztatiurlop
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CarRent.Models.Brand", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Brandes");
-                });
-
-            modelBuilder.Entity("CarRent.Models.CarModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("BrandId");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("Year");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BrandId");
-
-                    b.ToTable("CarModels");
-                });
-
-            modelBuilder.Entity("CarRent.Models.Course", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Cost");
-
-                    b.Property<string>("Name");
-
-                    b.Property<int>("NumberOfHours");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Courses");
-                });
-
-            modelBuilder.Entity("CarRent.Models.Customer", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address");
-
-                    b.Property<string>("City");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("PhoneNumber");
-
-                    b.Property<string>("PostCode");
-
-                    b.Property<string>("Surname");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("CarRent.Models.CustomerCar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CarModelId");
-
-                    b.Property<int?>("CustomerId");
-
-                    b.Property<string>("RegistrationNumber");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarModelId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("CustomerCars");
-                });
-
-            modelBuilder.Entity("CarRent.Models.EmployeeTraining", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CourseId");
-
-                    b.Property<DateTime>("DateFrom");
-
-                    b.Property<DateTime>("DateTo");
-
-                    b.Property<int?>("WorkerId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("WorkerId");
-
-                    b.ToTable("EmployeeTrainings");
-                });
 
             modelBuilder.Entity("CarRent.Models.Employment", b =>
                 {
@@ -211,99 +97,6 @@ namespace CarRent.Data.Migrations
                     b.ToTable("Jobs");
                 });
 
-            modelBuilder.Entity("CarRent.Models.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("BankAccountNumber");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int>("ServiceId");
-
-                    b.Property<int?>("TypesOfPaymentId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServiceId")
-                        .IsUnique();
-
-                    b.HasIndex("TypesOfPaymentId");
-
-                    b.ToTable("Payments");
-                });
-
-            modelBuilder.Entity("CarRent.Models.Rent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Cost");
-
-                    b.Property<int?>("CustomerId");
-
-                    b.Property<DateTime>("DateFrom");
-
-                    b.Property<DateTime>("DateTo");
-
-                    b.Property<int?>("ReplacementCarId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("ReplacementCarId");
-
-                    b.ToTable("Rents");
-                });
-
-            modelBuilder.Entity("CarRent.Models.ReplacementCar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CarModelId");
-
-                    b.Property<int?>("GarageId");
-
-                    b.Property<string>("RegistrationNumber");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarModelId");
-
-                    b.HasIndex("GarageId");
-
-                    b.ToTable("ReplacementCars");
-                });
-
-            modelBuilder.Entity("CarRent.Models.Service", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CustomerCarId");
-
-                    b.Property<int?>("TypesOfServiceId");
-
-                    b.Property<int?>("WorkerId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerCarId");
-
-                    b.HasIndex("TypesOfServiceId");
-
-                    b.HasIndex("WorkerId");
-
-                    b.ToTable("Services");
-                });
-
             modelBuilder.Entity("CarRent.Models.TypeOfEmployment", b =>
                 {
                     b.Property<int>("Id")
@@ -315,34 +108,6 @@ namespace CarRent.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TypesOfEmployment");
-                });
-
-            modelBuilder.Entity("CarRent.Models.TypeOfPayment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypesOfPayment");
-                });
-
-            modelBuilder.Entity("CarRent.Models.TypeOfService", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Cost");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TypesOfService");
                 });
 
             modelBuilder.Entity("CarRent.Models.Vacation", b =>
@@ -558,35 +323,6 @@ namespace CarRent.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CarRent.Models.CarModel", b =>
-                {
-                    b.HasOne("CarRent.Models.Brand", "Brand")
-                        .WithMany("CarModels")
-                        .HasForeignKey("BrandId");
-                });
-
-            modelBuilder.Entity("CarRent.Models.CustomerCar", b =>
-                {
-                    b.HasOne("CarRent.Models.CarModel", "CarModel")
-                        .WithMany("CustomerCars")
-                        .HasForeignKey("CarModelId");
-
-                    b.HasOne("CarRent.Models.Customer", "Customer")
-                        .WithMany("CustomerCars")
-                        .HasForeignKey("CustomerId");
-                });
-
-            modelBuilder.Entity("CarRent.Models.EmployeeTraining", b =>
-                {
-                    b.HasOne("CarRent.Models.Course", "Course")
-                        .WithMany("EmployeeTrainings")
-                        .HasForeignKey("CourseId");
-
-                    b.HasOne("CarRent.Models.Worker", "Worker")
-                        .WithMany("EmployeeTrainings")
-                        .HasForeignKey("WorkerId");
-                });
-
             modelBuilder.Entity("CarRent.Models.Employment", b =>
                 {
                     b.HasOne("CarRent.Models.TypeOfEmployment", "TypeOfEmployment")
@@ -602,55 +338,6 @@ namespace CarRent.Data.Migrations
                 {
                     b.HasOne("CarRent.Models.Worker", "Worker")
                         .WithMany("Exemptions")
-                        .HasForeignKey("WorkerId");
-                });
-
-            modelBuilder.Entity("CarRent.Models.Payment", b =>
-                {
-                    b.HasOne("CarRent.Models.Service", "Service")
-                        .WithOne("ServiceId")
-                        .HasForeignKey("CarRent.Models.Payment", "ServiceId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CarRent.Models.TypeOfPayment", "TypesOfPayment")
-                        .WithMany("Payments")
-                        .HasForeignKey("TypesOfPaymentId");
-                });
-
-            modelBuilder.Entity("CarRent.Models.Rent", b =>
-                {
-                    b.HasOne("CarRent.Models.Customer", "Customer")
-                        .WithMany("Rents")
-                        .HasForeignKey("CustomerId");
-
-                    b.HasOne("CarRent.Models.ReplacementCar", "ReplacementCar")
-                        .WithMany("Rents")
-                        .HasForeignKey("ReplacementCarId");
-                });
-
-            modelBuilder.Entity("CarRent.Models.ReplacementCar", b =>
-                {
-                    b.HasOne("CarRent.Models.CarModel", "CarModel")
-                        .WithMany("ReplacementCars")
-                        .HasForeignKey("CarModelId");
-
-                    b.HasOne("CarRent.Models.Garage", "Garage")
-                        .WithMany("ReplacementCars")
-                        .HasForeignKey("GarageId");
-                });
-
-            modelBuilder.Entity("CarRent.Models.Service", b =>
-                {
-                    b.HasOne("CarRent.Models.CustomerCar", "CustomerCar")
-                        .WithMany("Services")
-                        .HasForeignKey("CustomerCarId");
-
-                    b.HasOne("CarRent.Models.TypeOfService", "TypesOfService")
-                        .WithMany("Services")
-                        .HasForeignKey("TypesOfServiceId");
-
-                    b.HasOne("CarRent.Models.Worker", "Worker")
-                        .WithMany()
                         .HasForeignKey("WorkerId");
                 });
 

@@ -13,7 +13,10 @@ namespace CarRent.Models
         public string PhoneNumber { get; set; }
         public Worker Boss { get; set; }
         public Job Job { get; set; }
+        public Garage Garage { get; set; }
         public ICollection<Exemption> Exemptions { get; set; }
+        public ICollection<Vacation> Vacations { get; set; }
+        public ICollection<EmployeeTraining> EmployeeTrainings { get; set; }
 
     }
 }
