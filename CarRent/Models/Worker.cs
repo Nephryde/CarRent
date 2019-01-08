@@ -11,6 +11,9 @@ namespace CarRent.Models
         public string Name { get; set; }
         public string Surname { get; set; }
         public string PhoneNumber { get; set; }
+        public string City { get; set; }
+        public string Address { get; set; }
+        public string PostCode { get; set; }
         public Worker Boss { get; set; }
         public Job Job { get; set; }
         public Garage Garage { get; set; }

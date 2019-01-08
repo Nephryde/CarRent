@@ -12,6 +12,5 @@ namespace CarRent.Models
         public ReplacementCar ReplacementCar { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }
-        public decimal Cost { get; set; }
     }
 }
