@@ -2,93 +2,133 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how to build ASP.NET apps that can run anywhere.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525028&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner2.svg" alt="Visual Studio" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    There are powerful new features in Visual Studio for building modern web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525030&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-        <div class="item">
-            <img src="~/images/banner3.svg" alt="Microsoft Azure" class="img-responsive" />
-            <div class="carousel-caption" role="option">
-                <p>
-                    Learn how Microsoft's Azure cloud platform allows you to build, deploy, and scale web apps.
-                    <a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkID=525027&clcid=0x409">
-                        Learn More
-                    </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat|Quicksand" rel="stylesheet">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
-<div class="row">
-    <div class="col-md-3">
-        <h2>Application uses</h2>
-        <ul>
-            <li>Sample pages using ASP.NET Core MVC</li>
-            <li>Theming using <a href="https://go.microsoft.com/fwlink/?LinkID=398939">Bootstrap</a></li>
-        </ul>
+<body class="my-body">  
+    <div class="my-container1">
+        <div class="left-side row">
+            <div class="row">
+                <div class="car-service">
+                    <p style="position: relative; top: 50px;">Car</p>
+                    <p>Service</p>
+                    <p class="guarantee">Gwarantowana jakość.</p>
+                </div>
+                <div>
+                    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                        <div class="form-group">
+                            <input class="form-control email" value="Email" />
+                            @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control password" value="Hasło" />
+                            @*<span asp-validation-for="Password" class="text-danger"></span>*@
+                        </div>
+                        <div class="checkbox1 material-switch pull-right" style="float: none !important">
+                            <input id="someSwitchOptionInfo" name="someSwitchOption001" type="checkbox" />
+                            <label for="someSwitchOptionInfo" class="label-primary"></label>
+                            <span style="margin-left: 5px;">Zapamiętaj mnie</span>
+                            <a asp-action="ForgotPassword" style="color: yellow; margin-left: 85px;">Zapomniałeś hasła?</a>
+                            <br />
+                            <a asp-action="Register" style="color: yellow; margin-left: 285px;">Zarejestruj się</a>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" style="width: 150px; font-size: 20px; margin: 30px 0 0 250px;">Zaloguj</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="icons">
+                <img class="main-icon" src="~/images/main-page-icon.png" />
+            </div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>How to</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398600">Add a Controller and View</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699315">Manage User Secrets using Secret Manager.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699316">Use logging to log a message.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699317">Add packages using NuGet.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699319">Target development, staging or production environment.</a></li>
-        </ul>
+    <div class="content">
+        <div class="fairrepair-to">
+            <img class="lower-logo" src="~/images/logo1.png"/>
+            <span style="font-size: 60px; position: relative; top: 23px;"><b>&nbsp;to:</b></span>
+        </div>
+        <div class="content-row row">
+            <div class="col-lg-5">
+                <div class="photo-box">
+                    <img class="photo" src="~/images/obraz3.png" />
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="content-header">
+                    PROFESJONALNY ZESPÓŁ
+                </div>
+                <div class="content-box">
+                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                </div>
+            </div>
+        </div>
+        <div class="content-row row">
+            <div class="col-lg-5">
+                <div class="photo-box">
+                    <img class="photo" src="~/images/obraz4.png" />
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="content-header">
+                    WIELOLETNIE DOŚWIADCZENIE
+                </div>
+                <div class="content-box">
+                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                </div>
+            </div>
+        </div>
+        <div class="content-row row">
+            <div class="col-lg-5">
+                <div class="photo-box">
+                    <img class="photo" src="~/images/obraz5.jpg" />
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="content-header">
+                    KOMPLEKSOWA OBSŁUGA
+                </div>
+                <div class="content-box">
+                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                </div>
+            </div>
+        </div>
+        <div class="content-row row">
+            <div class="col-lg-5">
+                <div class="photo-box">
+                    <img class="photo" src="~/images/obraz7.png" />
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="content-header">
+                    NOWOCZESNE TECHNOLOGIE
+                </div>
+                <div class="content-box">
+                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                </div>
+            </div>
+        </div>
+        <div class="content-row row">
+            <div class="col-lg-5">
+                <div class="photo-box">
+                    <img class="photo" src="~/images/obraz6.png" />
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="content-header">
+                    ODWIEDŹ NAS!
+                </div>
+                <div class="content-box">
+                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-3">
-        <h2>Overview</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=518008">Conceptual overview of what is ASP.NET Core</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=699320">Fundamentals of ASP.NET Core such as Startup and middleware.</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398602">Working with Data</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkId=398603">Security</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699321">Client side development</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699322">Develop on different platforms</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=699323">Read more on the documentation site</a></li>
-        </ul>
-    </div>
-    <div class="col-md-3">
-        <h2>Run &amp; Deploy</h2>
-        <ul>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517851">Run your app</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=517853">Run tools such as EF migrations and more</a></li>
-            <li><a href="https://go.microsoft.com/fwlink/?LinkID=398609">Publish to Microsoft Azure Web Apps</a></li>
-        </ul>
-    </div>
-</div>
+
+</body>
+
+
