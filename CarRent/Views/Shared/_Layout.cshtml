@@ -9,8 +9,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CarRent</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Montserrat|Quicksand" rel="stylesheet">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
@@ -23,7 +27,7 @@
 
     </environment>
 </head>
-<body style="padding: 0;">
+<body class="bg-layout font" style="padding: 0;">
 
     <partial name="_CookieConsentPartial" />
 
@@ -42,7 +46,7 @@
                 else
                 {
                 <ul>
-                    <li><a asp-area="Identity" asp-page="/Account/Login">Zaloguj</a></li>
+                    <li><a href="#login" id="login-button">Zaloguj</a></li>
                     <li><a asp-area="Identity" asp-page="/Account/Register">Rejestracja</a></li>
                 </ul>
                 }
@@ -54,22 +58,25 @@
         <img class="background-photo" src="~/images/garage-hanging.jpg" />
 
     </div>
-    <div class="line">
+    <div class="line" id="login">
         <ul>
             <li><a asp-area="" asp-controller="Home" asp-action="Index" class="active">Strona główna</a></li>
-            <li><a asp-area="" asp-controller="Services" asp-action="Index">Oferta</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Offer">Oferta</a></li>
             <li><a asp-area="" asp-controller="Services" asp-action="Index">Cennik</a></li>
             @if (SignInManager.IsSignedIn(User))
             {
                 <li><a asp-area="" asp-controller="Manage" asp-action="Index">Zarządzaj</a></li>
             }
-            <li><a href="#home">Kontakt</a></li>
-            <li><a href="#news">O nas</a></li>
-            <li><a href="#contact">FAQ</a></li>
-
+            <li><a asp-area="" asp-controller="Home" asp-action="Contact">Kontakt</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="About">O nas</a></li>
+            <li><a asp-area="" asp-controller="Home" asp-action="Faq">FAQ</a></li>
         </ul>
     </div>
-    @RenderBody()
+
+    <div class="text-content">
+        @RenderBody()
+    </div>
+    
     <footer class="footer"></footer>
 
     <environment include="Development">

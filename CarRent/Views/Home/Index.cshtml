@@ -1,56 +1,61 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model CarRent.Areas.Identity.Pages.Account.LoginModel
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Montserrat|Quicksand" rel="stylesheet">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+@using Microsoft.AspNetCore.Identity
 
-<body class="my-body">  
-    <div class="my-container1">
-        <div class="left-side row">
-            <div class="row">
-                <div class="car-service">
-                    <p style="position: relative; top: 50px;">Car</p>
-                    <p>Service</p>
-                    <p class="guarantee">Gwarantowana jakość.</p>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<body class="my-body">
+    @if (!SignInManager.IsSignedIn(User))
+    {
+        <div class="my-container1">
+            <div class="left-side row">
+                <div class="row">
+                    <div class="car-service">
+                        <p style="position: relative; top: 50px;">Car</p>
+                        <p>Service</p>
+                        <p class="guarantee">Gwarantowana jakość.</p>
+                    </div>
+                    <div>
+                        <form method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <input asp-for="Input.Email" class="form-control email" placeholder="Email" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Input.Password" class="form-control password" placeholder="Hasło" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <div class="checkbox1 material-switch pull-right" style="float: none !important">
+                                <input id="someSwitchOptionInfo" name="someSwitchOption001" type="checkbox" />
+                                <label for="someSwitchOptionInfo" class="label-primary"></label>
+                                <span style="margin-left: 5px; font-size: 17px;">Zapamiętaj mnie</span>
+                                <a style="color: yellow; margin-left: 30px; text-decoration: none; font-size: 17px;">Zapomniałeś hasła?</a>
+                                <br />
+                                <a asp-area="Identity" asp-page="/Account/Register" style="font-size: 17px; color: yellow; margin-left: 263px; text-decoration: none">Zarejestruj się</a>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" style="width: 150px; font-size: 20px; margin: 30px 0 0 250px;">Zaloguj</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div>
-                    <form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
-                        <div class="form-group">
-                            <input class="form-control email" placeholder="Email" />
-                            @*<span asp-validation-for="Email" class="text-danger"></span>*@
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control password" placeholder="Hasło" />
-                            @*<span asp-validation-for="Password" class="text-danger"></span>*@
-                        </div>
-                        <div class="checkbox1 material-switch pull-right" style="float: none !important">
-                            <input id="someSwitchOptionInfo" name="someSwitchOption001" type="checkbox" />
-                            <label for="someSwitchOptionInfo" class="label-primary"></label>
-                            <span style="margin-left: 5px;">Zapamiętaj mnie</span>
-                            <a asp-action="ForgotPassword" style="color: yellow; margin-left: 85px;">Zapomniałeś hasła?</a>
-                            <br />
-                            <a asp-action="Register" style="color: yellow; margin-left: 285px;">Zarejestruj się</a>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary" style="width: 150px; font-size: 20px; margin: 30px 0 0 250px;">Zaloguj</button>
-                        </div>
-                    </form>
+            </div>
+            <div class="right-side">
+                <div class="icons">
+                    <img class="main-icon" src="~/images/main-page-icon.png" />
                 </div>
             </div>
         </div>
-        <div class="right-side">
-            <div class="icons">
-                <img class="main-icon" src="~/images/main-page-icon.png" />
-            </div>
-        </div>
-    </div>
+    }
     <div class="content">
         <div class="fairrepair-to">
-            <img class="lower-logo" src="~/images/logo1.png"/>
-            <span style="font-size: 60px; position: relative; top: 23px;"><b>&nbsp;to:</b></span>
+            @if (!SignInManager.IsSignedIn(User))
+            {
+                <img class="lower-logo" src="~/images/logo1.png" />
+                <span style="font-size: 60px; position: relative; top: 23px;"><b>&nbsp;to:</b></span>
+            }
         </div>
         <div class="content-row row">
             <div class="col-lg-5">
@@ -62,8 +67,9 @@
                 <div class="content-header">
                     PROFESJONALNY ZESPÓŁ
                 </div>
-                <div class="content-box">
-                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                <div class="content-box mt-1">
+                    Lorem ipsum dolor sit amet, mel omnium oportere consectetuer id, vocent dolorem est et. Soleat tacimates definitionem ex eos. Pro no natum referrentur consequuntur, solum mucius aliquando ius te. Ad has lorem placerat necessitatibus, no nam habemus corpora, eum debet epicurei principes ad.
+                    Officiis necessitatibus in cum, vim at summo imperdiet philosophia. Quodsi facilis assentior et mea.Ne prompta deseruisse has, at malorum veritus nam, mei ad eirmod civibus intellegat.
                 </div>
             </div>
         </div>
@@ -77,8 +83,9 @@
                 <div class="content-header">
                     WIELOLETNIE DOŚWIADCZENIE
                 </div>
-                <div class="content-box">
-                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                <div class="content-box mt-1">
+                    Lorem ipsum dolor sit amet, mel omnium oportere consectetuer id, vocent dolorem est et. Soleat tacimates definitionem ex eos. Pro no natum referrentur consequuntur, solum mucius aliquando ius te. Ad has lorem placerat necessitatibus, no nam habemus corpora, eum debet epicurei principes ad.
+                    Officiis necessitatibus in cum, vim at summo imperdiet philosophia. Quodsi facilis assentior et mea.Ne prompta deseruisse has, at malorum veritus nam, mei ad eirmod civibus intellegat.
                 </div>
             </div>
         </div>
@@ -92,8 +99,9 @@
                 <div class="content-header">
                     KOMPLEKSOWA OBSŁUGA
                 </div>
-                <div class="content-box">
-                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                <div class="content-box mt-1">
+                    Lorem ipsum dolor sit amet, mel omnium oportere consectetuer id, vocent dolorem est et. Soleat tacimates definitionem ex eos. Pro no natum referrentur consequuntur, solum mucius aliquando ius te. Ad has lorem placerat necessitatibus, no nam habemus corpora, eum debet epicurei principes ad.
+                    Officiis necessitatibus in cum, vim at summo imperdiet philosophia. Quodsi facilis assentior et mea.Ne prompta deseruisse has, at malorum veritus nam, mei ad eirmod civibus intellegat.
                 </div>
             </div>
         </div>
@@ -107,8 +115,9 @@
                 <div class="content-header">
                     NOWOCZESNE TECHNOLOGIE
                 </div>
-                <div class="content-box">
-                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                <div class="content-box mt-1">
+                    Lorem ipsum dolor sit amet, mel omnium oportere consectetuer id, vocent dolorem est et. Soleat tacimates definitionem ex eos. Pro no natum referrentur consequuntur, solum mucius aliquando ius te. Ad has lorem placerat necessitatibus, no nam habemus corpora, eum debet epicurei principes ad.
+                    Officiis necessitatibus in cum, vim at summo imperdiet philosophia. Quodsi facilis assentior et mea.Ne prompta deseruisse has, at malorum veritus nam, mei ad eirmod civibus intellegat.
                 </div>
             </div>
         </div>
@@ -122,13 +131,30 @@
                 <div class="content-header">
                     ODWIEDŹ NAS!
                 </div>
-                <div class="content-box">
-                    Lorem ipsum lasodloasdmid ajsidjawiew wejaas dkjwkej wjeawkej wajeajweja jwakejawej wjeakwjewae jkwlajekawe
+                <div class="content-box mt-1 p-t-2">
+                    Lorem ipsum dolor sit amet, mel omnium oportere consectetuer id, vocent dolorem est et. Soleat tacimates definitionem ex eos. Pro no natum referrentur consequuntur, solum mucius aliquando ius te. Ad has lorem placerat necessitatibus, no nam habemus corpora, eum debet epicurei principes ad.
+                    Officiis necessitatibus in cum, vim at summo imperdiet philosophia. Quodsi facilis assentior et mea.Ne prompta deseruisse has, at malorum veritus nam, mei ad eirmod civibus intellegat.
                 </div>
             </div>
         </div>
     </div>
 
+    <script>
+        $(document).ready(function () {
+            $("#login-button").on('click', function (event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 800, function () {
+                        window.location.hash = hash;
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 
