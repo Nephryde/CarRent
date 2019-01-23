@@ -1,0 +1,30 @@
+﻿@model IEnumerable<CarRent.Models.ViewModels.ListWorkersViewModel>
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Manage/Index.cshtml";
+}
+
+<h2>Pracownicy</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Imię i nazwisko</th>
+            <th>Warsztat</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var worker in Model)
+        {
+            <tr>
+                <td>@worker.Id</td>
+                <td>@worker.Name @worker.Surname</td>
+                <td>@worker.GarageName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -16,37 +21,54 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 </head>
-<body>
+<body style="padding: 0;">
 
     <partial name="_CookieConsentPartial" />
 
-        <div class="background-container">
-            <div class="upper-bar">
+    <div class="background-container">
+        <div class="upper-bar">
+            
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })" method="post" id="logoutForm">
+                        <ul>
+                            <li><a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Witaj @UserManager.GetUserName(User)!</a></li>
+                            <li><button type="submit" class="btn btn-link" style="color: white; font-size: 20px; font-weight: bold; padding-top: 13px;">Wyloguj</button></li>
+                        </ul>
+                    </form>
+                }
+                else
+                {
                 <ul>
-                    <li><a href="#zaloguj">Zaloguj</a></li>
-                    <li><a href="#zaloguj">Rejestracja</a></li>
+                    <li><a asp-area="Identity" asp-page="/Account/Login">Zaloguj</a></li>
+                    <li><a asp-area="Identity" asp-page="/Account/Register">Rejestracja</a></li>
                 </ul>
-            </div>
-            <div class="positioning">
-                <img class="background-logo" src="~/images/logo1.png" />
-            </div>
-            <img class="background-photo" src="~/images/garage-hanging.jpg" />
-
+                }
+                
         </div>
-        <div class="line">
-            <ul>
-                <li><a class="active" href="#home">Strona główna</a></li>
-                <li><a href="#home">Oferta</a></li>
-                <li><a href="#home">Cennik</a></li>
-                <li><a href="#home">Konto</a></li>
-                <li><a href="#home">Kontakt</a></li>
-                <li><a href="#news">O nas</a></li>
-                <li><a href="#contact">FAQ</a></li>
-
-            </ul>
+        <div class="positioning">
+            <img class="background-logo" src="~/images/logo1.png" />
         </div>
-        @RenderBody()
-        <footer class="footer"></footer>
+        <img class="background-photo" src="~/images/garage-hanging.jpg" />
+
+    </div>
+    <div class="line">
+        <ul>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index" class="active">Strona główna</a></li>
+            <li><a asp-area="" asp-controller="Services" asp-action="Index">Oferta</a></li>
+            <li><a asp-area="" asp-controller="Services" asp-action="Index">Cennik</a></li>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li><a asp-area="" asp-controller="Manage" asp-action="Index">Zarządzaj</a></li>
+            }
+            <li><a href="#home">Kontakt</a></li>
+            <li><a href="#news">O nas</a></li>
+            <li><a href="#contact">FAQ</a></li>
+
+        </ul>
+    </div>
+    @RenderBody()
+    <footer class="footer"></footer>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

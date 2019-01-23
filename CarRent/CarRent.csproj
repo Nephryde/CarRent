@@ -6,6 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Data\Migrations\20190120225018_Dodanie BossId oraz JobId.cs" />
+    <Compile Remove="Data\Migrations\20190120225018_Dodanie BossId oraz JobId.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190120225202_Dodanie tylko BossId.cs" />
+    <Compile Remove="Data\Migrations\20190120225202_Dodanie tylko BossId.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190120225704_Dodanie BossId.cs" />
+    <Compile Remove="Data\Migrations\20190120225704_Dodanie BossId.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190120230132_Dodanie BossId.cs" />
+    <Compile Remove="Data\Migrations\20190120230132_Dodanie BossId.Designer.cs" />
+    <Compile Remove="Data\Migrations\20190120230925_Dodanie JobId.cs" />
+    <Compile Remove="Data\Migrations\20190120230925_Dodanie JobId.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.4" />
@@ -15,6 +28,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.5" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
   </ItemGroup>
 
 </Project>

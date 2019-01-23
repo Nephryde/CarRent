@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using CarRent.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using CarRent.Data.Services.Interfaces;
+using CarRent.Data.Services;
 
 namespace CarRent
 {
@@ -41,6 +43,10 @@ namespace CarRent
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddScoped<IServiceService, ServiceService>();
+            services.AddScoped<IWorkerService, WorkerService>();
+            services.AddScoped<IGarageService, GarageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

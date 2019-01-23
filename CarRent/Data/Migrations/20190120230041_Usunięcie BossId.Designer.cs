@@ -4,14 +4,16 @@ using CarRent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRent.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190120230041_Usunięcie BossId")]
+    partial class UsunięcieBossId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -370,8 +372,6 @@ namespace CarRent.Data.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<int?>("BossId");
-
                     b.Property<string>("City");
 
                     b.Property<int>("GarageId");
@@ -387,8 +387,6 @@ namespace CarRent.Data.Migrations
                     b.Property<string>("Surname");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BossId");
 
                     b.HasIndex("GarageId");
 
@@ -667,10 +665,6 @@ namespace CarRent.Data.Migrations
 
             modelBuilder.Entity("CarRent.Models.Worker", b =>
                 {
-                    b.HasOne("CarRent.Models.Worker", "Boss")
-                        .WithMany()
-                        .HasForeignKey("BossId");
-
                     b.HasOne("CarRent.Models.Garage", "Garage")
                         .WithMany("Workers")
                         .HasForeignKey("GarageId")
