@@ -4,14 +4,16 @@ using CarRent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRent.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190123160142_Dodanie id kluczów do Employment")]
+    partial class DodanieidkluczówdoEmployment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,13 +120,13 @@ namespace CarRent.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CourseId");
+                    b.Property<int?>("CourseId");
 
                     b.Property<DateTime>("DateFrom");
 
                     b.Property<DateTime>("DateTo");
 
-                    b.Property<int>("WorkerId");
+                    b.Property<int?>("WorkerId");
 
                     b.HasKey("Id");
 
@@ -584,13 +586,11 @@ namespace CarRent.Data.Migrations
                 {
                     b.HasOne("CarRent.Models.Course", "Course")
                         .WithMany("EmployeeTrainings")
-                        .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CourseId");
 
                     b.HasOne("CarRent.Models.Worker", "Worker")
                         .WithMany("EmployeeTrainings")
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("WorkerId");
                 });
 
             modelBuilder.Entity("CarRent.Models.Employment", b =>

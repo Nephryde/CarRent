@@ -1,0 +1,66 @@
+﻿@model CarRent.Models.Worker
+
+@{
+    ViewData["Title"] = "AddWorker";
+    Layout = "~/Views/Shared/ManageLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+        <h2>Dodaj pracownika</h2>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        
+        <form method="post" asp-controller="Worker" asp-action="AddWorker">
+
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input class="form-control" asp-for="Name" placeholder="Imię" required />
+                @*<span asp-validation-for="Name" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname"></label>
+                <input class="form-control" asp-for="Surname" placeholder="Nazwisko" required />
+                @*<span asp-validation-for="Surname" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <input class="form-control" asp-for="Address" placeholder="Adres" required />
+                @*<span asp-validation-for="Address" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="City"></label>
+                <input class="form-control" asp-for="City" placeholder="Warszawa" required />
+                @*<span asp-validation-for="GarageId" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="PostCode"></label>
+                <input class="form-control" asp-for="PostCode" placeholder="11-111" required />
+                @*<span asp-validation-for="GarageId" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="JobId"></label>
+                <select asp-for="JobId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfJobs, "Id", "JobName"))"></select>
+                @*<span asp-validation-for="GarageId" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="BossId"></label>
+                <select asp-for="BossId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfBosses, "Id", "FullName"))"></select>
+                @*<span asp-validation-for="GarageId" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="GarageId"></label>
+                <select asp-for="GarageId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfGarages, "Id", "Name"))"></select>
+            </div>
+
+            <input type="submit" value="Dodaj" class="btn btn-primary" />
+
+        </form>
+
+    </div>
+</div>
+
