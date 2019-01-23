@@ -304,6 +304,10 @@ body {
     font-weight: bold;
 }
 
+.content-box {
+    font-size: 18px;
+}
+
 .photo {
     width: 400px;
     height: 250px;
@@ -328,4 +332,42 @@ body {
 .footer {
     height: 200px;
     background-color: #2a3549;
+}
+
+.bg-layout {
+    background-color: #3e4454;
+    font-family: 
+}
+
+.bg-layout2 {
+    background-color: #484D58;
+}
+
+.mt-1 {
+    margin-top: 1rem;
+}
+
+.mt-2 {
+    margin-top: 2rem;
+}
+
+.mt-3 {
+    margin-top: 3rem;
+}
+
+.mt-4 {
+    margin-top: 4rem;
+}
+
+.mt-5 {
+    margin-top: 5rem;
+}
+
+.text-content {
+    color: white;
+    font-size: 22px;
+}
+
+.font {
+    font-family: 'Quicksand', sans-serif;
 }
