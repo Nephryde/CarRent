@@ -8,7 +8,9 @@ namespace CarRent.Models
     public class EmployeeTraining
     {
         public int Id { get; set; }
+        public int WorkerId { get; set; }
         public Worker Worker { get; set; }
+        public int CourseId { get; set; }
         public Course Course { get; set; }
         public DateTime DateFrom { get; set; }
         public DateTime DateTo { get; set; }

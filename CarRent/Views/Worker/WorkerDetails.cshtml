@@ -1,0 +1,42 @@
+﻿@model CarRent.Models.ViewModels.WorkerDetailsMainViewModel
+
+@{
+    ViewData["Title"] = "WorkerDetails";
+    Layout = "~/Views/Shared/ManageLayout.cshtml";
+}
+
+<h2>WorkerDetails</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <p>Imie: @Model.workerDetailsViewModel.Name</p>
+        <p>Nazwisko: @Model.workerDetailsViewModel.Surname</p>
+        <p>Adres: @Model.workerDetailsViewModel.Address</p>
+        <p>Miasto: @Model.workerDetailsViewModel.City</p>
+        <p>Telefon: @Model.workerDetailsViewModel.PhoneNumber</p>
+        <p>Kod pocztowy: @Model.workerDetailsViewModel.PostalCode</p>
+        <p>Kierownik: @Model.workerDetailsViewModel.BossName @Model.workerDetailsViewModel.BossSurname</p>
+        <p>Stanowisko: @Model.workerDetailsViewModel.JobName</p>
+        <p>Warsztat: @Model.workerDetailsViewModel.GarageName</p>
+    </div>
+    <div class="col-md-2">
+        <a href="#lol">Szczegóły zatrudnienia</a> &nbsp;
+        <p>Wynagrodzenie: @Model.workerEmploymentViewModel.Salary</p>
+        <p>Premia: @Model.workerEmploymentViewModel.Bonus</p>
+        <p>Data zatrudnienia: @Model.workerEmploymentViewModel.DateFrom</p>
+        <p>Data zakończenia współpracy: @Model.workerEmploymentViewModel.DateTo</p>
+        <p>Typ zatrudnienia: @Model.workerEmploymentViewModel.TypeOfEmploymentName</p>
+    </div>
+    <div class="col-md-2">
+        <a href="#lol">Historia szkoleń</a> &nbsp; ||
+    </div>
+    <div class="col-md-2">
+        <a href="#lol">Historia zwolnień</a> &nbsp; ||
+    </div>
+
+
+
+
+</div>

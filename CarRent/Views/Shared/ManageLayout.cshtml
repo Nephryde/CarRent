@@ -26,6 +26,8 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat|Quicksand" rel="stylesheet">
 </head>
 <body style="padding: 0; margin: 0; background-color: #fff;" class="my-body">
     
@@ -39,37 +41,23 @@
         <a href="#">Contact</a>
     </div>
 
-    <div id="main">
-        <div class="line" style="min-height: 60px;">
+    <div class="line" style="min-height: 60px;">
             
-            <ul>
-                <li><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
-                <li><a asp-area="" asp-controller="Services" asp-action="Index">Oferta</a></li>
-                <li><a asp-area="" asp-controller="Services" asp-action="Index">Cennik</a></li>
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    <li><a asp-area="" asp-controller="Manage" asp-action="Index" class="active">Zarządzaj</a></li>
-                }
-                <li><a href="#home">Kontakt</a></li>
-                <li><a href="#news">O nas</a></li>
-                <li><a href="#contact">FAQ</a></li>
-            </ul>
-        </div>
-        <span class="menu-button" style="font-size:30px;cursor:pointer; float: left;" onclick="openNav()">&#9776; Menu</span>
-        @RenderBody()
-    </div>  
+        <ul>
+            <li><a asp-area="" asp-controller="Home" asp-action="Index">Strona główna</a></li>
+            <li><a asp-area="" asp-controller="Services" asp-action="Index">Oferta</a></li>
+            <li><a asp-area="" asp-controller="Services" asp-action="Index">Cennik</a></li>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <li><a asp-area="" asp-controller="Manage" asp-action="Index" class="active">Zarządzaj</a></li>
+            }
+            <li><a href="#home">Kontakt</a></li>
+            <li><a href="#news">O nas</a></li>
+            <li><a href="#contact">FAQ</a></li>
+        </ul>
+    </div>
+
+    @RenderBody()
 
 </body>
 </html>
-
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-        document.getElementById("main").style.marginLeft = "250px";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0";
-        document.getElementById("main").style.marginLeft = "0";
-    }
-</script>
