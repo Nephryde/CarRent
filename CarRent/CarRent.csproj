@@ -6,6 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml.cs" />
+    <Compile Remove="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml.cs" />
+    <Compile Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml.cs" />
     <Compile Remove="Data\Migrations\20190120225018_Dodanie BossId oraz JobId.cs" />
     <Compile Remove="Data\Migrations\20190120225018_Dodanie BossId oraz JobId.Designer.cs" />
     <Compile Remove="Data\Migrations\20190120225202_Dodanie tylko BossId.cs" />
@@ -16,6 +19,12 @@
     <Compile Remove="Data\Migrations\20190120230132_Dodanie BossId.Designer.cs" />
     <Compile Remove="Data\Migrations\20190120230925_Dodanie JobId.cs" />
     <Compile Remove="Data\Migrations\20190120230925_Dodanie JobId.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

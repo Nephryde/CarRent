@@ -7,6 +7,46 @@
 <div class="fairrepair-to"></div>
 <div class="row">
     <div class="col-md-8 col-md-offset-2 mt-3" style="margin-bottom: 4rem">
+        <h1>Najczęściej zadawane pytania</h1>
+        <hr />
+        <h2 class="mt-2 cursor">Jakie marki pojazdów są obsługiwane?</h2>
+        <p>Obsługujemy pojazdy wszystkich marek samochodów. Pomagamy zamówić wszelkie części potrzebne do danej naprawy oryginale jak i zamienniki.</p>
 
+        <h2 class="mt-2 cursor">Czy wymieniacie paski rozrządu?</h2>
+        <p>Wymienimy kompletny zestaw rozrządu - pasek, rolki: napinającą i prowadzącą paska rozrządu, pompę wody (w przypadku gdy jest napędzana paskiem rozrządu), uszczelniacze wału i wałka rozrządu, płyn chłodzący a także pasek osprzętu.</p>
+
+        <h2 class="mt-2 cursor">Jak przebiega proces naprawy?</h2>
+        <p>Przedstawiamy klientowi  wstępy kosztorys naprawy w zależności od ceny danej części . Jeśli w trakcie naprawy ujawniają się dodatkowe usterki klient jest na bieżąco informowany. Nie robimy nic bez wiedzy i zgody właściciela pojazdu.</p>
+
+        <h2 class="mt-2 cursor">Jak długo trzeba czekać na przyjęcie pojazdu do warsztatu?</h2>
+        <p>Nie ma konkretnej reguły, termin ustalany jest w zależności od ilości bieżących zleceń jakie wykonujemy obecnie na warsztacie a także stopień skomplikowania usterki z jaką zgłasza się do nas właściciel pojazdu.</p>
+
+        <h2 class="mt-2 cursor">Gdzie znajdę cennik usług?</h2>
+        <p>Nie posiadamy takiego cennika, ponieważ ceny ustalane są indywidualnie w zależności od marki pojazdu oraz zastosowanych rozwiązań. W celu uzyskania konkretnych informacji na temat wyceny prosimy naszych klientów o bezpośredni kontakt telefoniczny, wiadomość  e-mail bądź osobiste przybycie do naszego warsztatu.</p>
+
+        <h2 class="mt-2 cursor">Kiedy należy wymienić olej w silniku?</h2>
+        <p>Olej silnikowy należy wymieniać zgodnie z zaleceniami producenta zawartymi w tabeli specyfikacji. Zależne jest to również od sposobu eksploatacji auta przez użytkownika, ponieważ zdarzają się przypadki , w których istnieje potrzeba częstszej wymiany oleju.</p>
+
+        <h2 class="mt-2 cursor">Czy wymiana płynu hamulcowego jest istotna?</h2>
+        <p>Wymiana płynu hamulcowego jest bardzo istotna, ponieważ wpływa na sprawność układu hamulcowego, odgrywa to ważną rolę w bezpieczeństwie podczas jazdy.</p>
     </div>
 </div>
+
+
+<script>
+    $(document).ready(function () {
+        const ar = document.getElementsByTagName("p");
+        let header = document.getElementsByTagName("h2");
+
+        for (let i = 0; i < header.length; i++) {
+            ar[i].style.display = "none";
+
+            header[i].onclick = () => {
+                if (ar[i].style.display === "none")
+                    ar[i].style.display = "block";
+                else
+                    ar[i].style.display = "none";
+            }
+        }
+    });
+</script>
