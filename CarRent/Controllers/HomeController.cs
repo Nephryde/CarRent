@@ -12,6 +12,8 @@ namespace CarRent.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Title = "Home page";
+
             return View();
         }
 
@@ -30,6 +32,16 @@ namespace CarRent.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult Faq()
+        {
+            return View();
+        }
+
+        public IActionResult Offer()
         {
             return View();
         }
