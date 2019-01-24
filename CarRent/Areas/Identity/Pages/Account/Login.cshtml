@@ -5,13 +5,12 @@
     ViewData["Title"] = "Log in";
 }
 
-<h2>@ViewData["Title"]</h2>
 <div class="row">
-    <div class="col-md-4 col-md-offset-1">
+    <div class="col-md-4 col-md-offset-4 mt-3">
+        <h1 class="ta-center">Zaloguj</h1>
+        <hr />
         <section>
             <form method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
                 <div asp-validation-summary="All" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Input.Email"></label>
@@ -19,27 +18,29 @@
                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Input.Password"></label>
+                    <label>Hasło</label>
                     <input asp-for="Input.Password" class="form-control" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
+                     <label asp-for="Input.RememberMe" style="font-size:20px">
+                         <input asp-for="Input.RememberMe" />
+                         Zapamiętaj mnie
+                     </label>
+                </div>
+                <div class="row mt-1 mb-1">
+                    <div class="col-md-4 col-md-offset-4">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary" style="width: 200px; font-size: 20px;">Zaloguj się</button>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-default">Log in</button>
-                </div>
-                <div class="form-group">
                     <p>
-                        <a asp-page="./ForgotPassword">Forgot your password?</a>
+                        <a asp-page="./ForgotPassword" style="color: yellow; text-decoration: none">Zapomniałeś hasła?</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
+                        <a asp-page="./Register" style="color: yellow; text-decoration: none">Zarejestruj się</a>
                     </p>
                 </div>
             </form>

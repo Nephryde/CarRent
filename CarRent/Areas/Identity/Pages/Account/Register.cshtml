@@ -19,25 +19,29 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="Input.Password"></label>
+                <label>Hasło</label>
                 <input asp-for="Input.Password" class="form-control" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
+                <label>Potwierdź hasło</label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            
-            <div class="row mt-4 mb-3">
+
+            <div class="row mt-4 mb-1">
                 <div class="col-md-4 col-md-offset-4">
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-default form-control">Register</button>
-                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 200px; font-size: 20px;">Zarejestruj się</button>
                 </div>
             </div>
+
+            <div class="form-group">
+                <p>
+                    <a asp-area="Identity" asp-page="/Account/Login" style="color: yellow; text-decoration: none">Zaloguj się</a>
+                </p>
+            </div>
         </form>
-    </div>
+</div>
 </div>
 
 @section Scripts {
