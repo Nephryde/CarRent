@@ -71,7 +71,7 @@ namespace CarRent.Controllers
         {            
             await _workerService.AddWorker(worker);
 
-            return View();
+            return View("~Views/Manage/Index.cshtml");
         }
 
         public async Task<IActionResult> WorkerDetails(int workerId)
