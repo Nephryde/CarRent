@@ -4,18 +4,104 @@
     Layout = "~/Views/Shared/ManageLayout.cshtml";
 }
 
+<br />
+<br />
 <div class="row">
     <div class="col-md-12" style="text-align: center">
         <h2><b>Panel administratora</b></h2>
-    </div>  
+        <br />
+    </div>
 </div>
 <div class="row">
-    <div class="col-md-12" style="text-align: center">
-
-        <h3>Pracownicy</h3>
-        <p><a asp-controller="Worker" asp-action="AddWorker">Dodaj pracownika</a></p>
-        <p><a asp-controller="Worker" asp-action="Index">Wszyscy pracownicy</a></p>
+    <div class="col-md-4 col-md-offset-4" style="text-align: center">
+        <button class="collapsible">Pracownicy</button>
+        <div class="content">
+            <div class="haha"><a asp-controller="Worker" asp-action="AddWorker">Dodaj pracownika</a></div>
+            <div class="haha"><a asp-controller="Worker" asp-action="Index">Wszyscy pracownicy</a></div>
+            <div class="haha"><a asp-controller="Worker" asp-action="Index">Zwolnij pracownika</a></div>
+        </div>
+        <hr />
+        <button class="collapsible">Klienci</button>
+        <div class="content">
+            <div class="haha"><a asp-controller="Worker" asp-action="AddWorker">Dodaj klienta</a></div>
+            <div class="haha"><a asp-controller="Worker" asp-action="Index">Wszyscy klienci</a></div>
+            <div class="haha"><a asp-controller="Worker" asp-action="Index">Zarządzaj klientem</a></div>
+        </div>
+        <hr />
+        <button class="collapsible">Samochody</button>
+        <div class="content">
+            <div class="haha"><a asp-controller="Worker" asp-action="AddWorker">Dodaj samochód</a></div>
+            <div class="haha"><a asp-controller="Worker" asp-action="Index">Wszystkie samochody</a></div>
+            <div class="haha"><a asp-controller="Worker" asp-action="Index">Historia pojazdów</a></div>
+        </div>
+        <hr />
+        <button class="collapsible">Serwis</button>
+        <div class="content">
+            <div class="haha"><a asp-controller="Worker" asp-action="AddWorker">Zarządzaj usługami</a></div>
+            <div class="haha"><a asp-controller="Worker" asp-action="Index">Nie wiem</a></div>
+            <div class="haha"><a asp-controller="Worker" asp-action="Index">Nie wiem</a></div>
+        </div>
     </div>
 </div>
 
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+</script>
+
+<style>
+    .collapsible {
+        background-color: #3e4454;
+        color: white;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: center;
+        outline: none;
+        font-size: 25px;
+    }
+
+        .active, .collapsible:hover {
+            background-color: yellow;
+            color: black;
+        }
+
+    .content {
+        padding: 0px 0px;
+        display: none;
+        overflow: hidden;
+        font-size: 20px;
+        background-color: #484D58;
+        color: white;
+        text-decoration: none;
+    }
+
+    .haha{
+        padding: 5px 18px;
+    }
+
+        .content .haha:hover
+        {
+            background-color: #333333;
+        }
+        
+        .content .haha a{
+            color: white;
+            text-decoration: none;
+        }
+</style>
 
