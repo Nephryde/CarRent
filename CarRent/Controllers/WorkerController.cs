@@ -45,6 +45,79 @@ namespace CarRent.Controllers
             IEnumerable<Garage> garageEnum;
             IEnumerable<Job> jobEnum;
             IEnumerable<Worker> workerEnum;
+            IEnumerable<TypeOfEmployment> employmentTypeEnum;
+
+            garageEnum = await _garageService.GetAllGarages();
+            List<Garage> garageList = garageEnum.ToList();
+            ViewBag.ListOfGarages = garageList;
+
+            jobEnum = await _workerService.GetAllJobs();
+            List<Job> jobList = jobEnum.ToList();
+            ViewBag.ListOfJobs = jobList;
+
+            workerEnum = await _workerService.GetOnlyBosses();
+            List<Worker> workerList = workerEnum.ToList();
+            List<Boss> bossList = new List<Boss>();
+
+            employmentTypeEnum = await _workerService.GetAllTypesEmployment();
+            List<TypeOfEmployment> employmentList = employmentTypeEnum.ToList();
+            ViewBag.ListOfEmployments = employmentList;
+
+            foreach (var item in workerList)
+                bossList.Add(new Boss { Id = item.Id, FullName = item.Name + " " + item.Surname });
+
+            ViewBag.ListOfBosses = bossList;         
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddWorker(AddingNewWorkerViewModel addingNewWorkerViewModel)
+        {
+            var worker = new Worker
+            {
+                Name = addingNewWorkerViewModel.Name,
+                Surname = addingNewWorkerViewModel.Surname,
+                PhoneNumber = addingNewWorkerViewModel.PhoneNumber,
+                City = addingNewWorkerViewModel.City,
+                Address = addingNewWorkerViewModel.Address,
+                PostCode = addingNewWorkerViewModel.PostCode,
+                BossId = addingNewWorkerViewModel.BossId,
+                JobId = addingNewWorkerViewModel.JobId,
+                GarageId = addingNewWorkerViewModel.GarageId
+            };
+
+            var employment = new Employment
+            {               
+                Salary = addingNewWorkerViewModel.Salary,
+                Bonus = addingNewWorkerViewModel.Bonus,
+                DateFrom = addingNewWorkerViewModel.DateFrom,
+                DateTo = addingNewWorkerViewModel.DateTo,
+                TypeOfEmploymentId = addingNewWorkerViewModel.TypeOfEmploymentId
+            };
+
+            await _workerService.AddWorker(worker);
+            employment.WorkerId = worker.Id;
+            await _workerService.AddEmployment(employment);
+            ViewBag.WorkerId = worker;
+
+            return RedirectToAction("Index", "Worker");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteWorker(int workerId)
+        {
+            await _workerService.DeleteWorkerById(workerId);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditWorker(int workerId)
+        {
+            IEnumerable<Garage> garageEnum;
+            IEnumerable<Job> jobEnum;
+            IEnumerable<Worker> workerEnum;
 
             garageEnum = await _garageService.GetAllGarages();
             List<Garage> garageList = garageEnum.ToList();
@@ -61,17 +134,19 @@ namespace CarRent.Controllers
             foreach (var item in workerList)
                 bossList.Add(new Boss { Id = item.Id, FullName = item.Name + " " + item.Surname });
 
-            ViewBag.ListOfBosses = bossList;         
+            ViewBag.ListOfBosses = bossList;
 
-            return View();
+            var worker = await _workerService.GetWorkerById(workerId);
+
+            return View(worker);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddWorker(Worker worker)
-        {            
-            await _workerService.AddWorker(worker);
+        public async Task<IActionResult> EditWorker(Worker worker)
+        {
+            await _workerService.EditWorker(worker);
 
-            return View("~Views/Manage/Index.cshtml");
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> WorkerDetails(int workerId)
@@ -130,8 +205,14 @@ namespace CarRent.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddWorkerTraining(int workerId)
+        public async Task<IActionResult> AddWorkerTraining(int workerId)
         {
+            IEnumerable<Course> courseEnum;
+
+            courseEnum = await _workerService.GetAllCourses();
+            List<Course> courseList = courseEnum.ToList();
+            ViewBag.ListOfCourses = courseList;
+
             ViewData["workerId"] = workerId;
             return View();
         }
@@ -144,5 +225,81 @@ namespace CarRent.Controllers
             return View(nameof(Index));
         }
 
+        public async Task<IActionResult> WorkerTrainingHistory(int workerId)
+        {
+            var employeeTrainingModel = await _workerService.GetWorkerAllTrainings(workerId);
+
+            var employeeTrainingHistoryResult = employeeTrainingModel
+                .Select(result => new WorkerTrainingHistoryViewModel
+                {
+                    DateFrom = result.DateFrom,
+                    DateTo = result.DateTo,
+                    Cost = _workerService.GetTrainingCourseCost(result.CourseId),
+                    TrainingName =_workerService.GetTrainingCourseName(result.CourseId),
+                    NumberOfHours = _workerService.GetTrainingCourseHours(result.CourseId)
+                });
+
+            return View(employeeTrainingHistoryResult);
+        }
+
+        [HttpGet]
+        public IActionResult AddWorkerExemption(int workerId)
+        {
+            ViewData["workerId"] = workerId;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddWorkerExemption(Exemption exemption)
+        {
+            await _workerService.AddWorkerExemption(exemption);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult AddWorkerVacation(int workerId)
+        {
+            ViewData["workerId"] = workerId;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddWorkerVacation(Vacation vacation)
+        {
+            await _workerService.AddWorkerVacation(vacation);
+
+            return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> WorkerPausesHistory(int workerId)
+        {
+            var employeeExemptionsModel = await _workerService.GetWorkerAllExemptions(workerId);
+            var employeeVacationsModel = await _workerService.GetWorkerAllVacations(workerId);
+
+            var employeeExemptionsListingResult = employeeExemptionsModel
+                .Select(result => new WorkerExemptionsViewModel
+                {
+                    ExemptionReason = result.Reason,
+                    ExemptionDateFrom = result.DateFrom,
+                    ExemptionDateTo = result.DateTo
+                });
+
+            var employeeVacationsListingResult = employeeVacationsModel
+                .Select(result => new WorkerVacationsViewModel
+                {
+                    VacationDateFrom = result.DateFrom,
+                    VacationDateTo = result.DateTo,
+                    TotalDays = (result.DateTo - result.DateFrom).TotalDays
+                });
+
+            var model = new WorkerPausesViewModel()
+            {
+                workerExemptionsViewModel = employeeExemptionsListingResult,
+                workerVacationsViewModel = employeeVacationsListingResult
+            };
+
+            return View(model);
+        }
     }
 }

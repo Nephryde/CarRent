@@ -62,7 +62,7 @@
         <ul>
             <li><a asp-area="" asp-controller="Home" asp-action="Index" class="active">Strona główna</a></li>
             <li><a asp-area="" asp-controller="Home" asp-action="Offer">Oferta</a></li>
-            <li><a asp-area="" asp-controller="Services" asp-action="Index">Cennik</a></li>
+            <li><a asp-area="" asp-controller="Services" asp-action="ListServices">Cennik</a></li>
             @if (SignInManager.IsSignedIn(User))
             {
                 <li><a asp-area="" asp-controller="Manage" asp-action="Index">Zarządzaj</a></li>

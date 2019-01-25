@@ -1,29 +1,27 @@
-﻿@model CarRent.Models.EmployeeTraining
+﻿@model CarRent.Models.Rent
 
 @{
-    ViewData["Title"] = "AddWorkerTrainig";
+    ViewData["Title"] = "RentCar";
     Layout = "~/Views/Shared/ManageLayout.cshtml";
 }
 
 <div class="row">
     <div class="col-md-2 col-md-offset-5">
-        <h2>Dodaj szkolenie</h2>
+        <h2>Wypożycz samochód zastępczy</h2>
     </div>
 </div>
 
-<form method="post" asp-controller="Worker" asp-action="AddWorkerTraining">
+<form method="post" asp-controller="Services" asp-action="RentCar">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-
-
             <div class="form-group">
-                <label asp-for="WorkerId"></label>
-                <input class="form-control" asp-for="WorkerId" readonly value="@ViewData["workerId"]" />
+                <label asp-for="CustomerId"></label>
+                <select asp-for="CustomerId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfCustomers, "Id", "Surname"))"></select>
                 @*<span asp-validation-for="Name" class="text-danger"></span>*@
             </div>
             <div class="form-group">
-                <label asp-for="CourseId"></label>
-                <select asp-for="CourseId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfCourses, "Id", "Name"))"></select>
+                <label asp-for="ReplacementCarId"></label>
+                <select asp-for="ReplacementCarId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfReplacementCars, "Id", "RegistrationNumber"))"></select>
                 @*<span asp-validation-for="Name" class="text-danger"></span>*@
             </div>
             <div class="form-group">
@@ -41,8 +39,9 @@
 
     <div class="row" style="text-align: center;">
         <div class="col-md-2 col-md-offset-5">
-            <input type="submit" value="Dodaj" class="btn btn-primary" style="font-size: 20px; margin-right: 15px;" />
+            <input type="submit" value="Wypożycz" class="btn btn-primary" style="font-size: 20px; margin-right: 15px;" />
             <input type="button" value="Anuluj" class="btn btn-primary" style="font-size: 20px" onClick="history.go(-1); return false;" />
         </div>
     </div>
 </form>
+

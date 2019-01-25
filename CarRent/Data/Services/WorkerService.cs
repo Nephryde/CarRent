@@ -20,10 +20,22 @@ namespace CarRent.Data.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task AddEmployment(Employment employment)
+        {
+            await _context.Employments.AddAsync(employment);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task DeleteWorkerById(int workerId)
         {
             Worker worker = await GetWorkerById(workerId);
             _context.Workers.Remove(worker);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task EditWorker(Worker worker)
+        {
+            _context.Workers.Update(worker);
             await _context.SaveChangesAsync();
         }
 
@@ -92,6 +104,84 @@ namespace CarRent.Data.Services
         public async Task<IEnumerable<Job>> GetAllJobs()
         {
             return await _context.Jobs.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<IEnumerable<Course>> GetAllCourses()
+        {
+            return await _context.Courses.AsNoTracking().ToListAsync();
+        }
+
+        public async Task<IEnumerable<EmployeeTraining>> GetWorkerAllTrainings(int workerId)
+        {
+            return await _context.EmployeeTrainings
+                .Where(x => x.WorkerId == workerId).ToListAsync();
+        }
+
+        public async Task<Course> GetTrainingCourse(int courseId)
+        {
+            return await _context.Courses
+                .FirstOrDefaultAsync(x => x.Id == courseId);
+        }
+
+        public string GetTrainingCourseName(int courseId)
+        {
+            return _context.Courses
+                .FirstOrDefault(x => x.Id == courseId).Name;
+        }
+
+        public decimal GetTrainingCourseCost(int courseId)
+        {
+            return _context.Courses
+                .FirstOrDefault(x => x.Id == courseId).Cost;
+        }
+
+        public int GetTrainingCourseHours(int courseId)
+        {
+            return _context.Courses
+                .FirstOrDefault(x => x.Id == courseId).NumberOfHours;
+        }
+
+        public async Task<IEnumerable<TypeOfEmployment>> GetAllTypesEmployment()
+        {
+            return await _context.TypesOfEmployment.AsNoTracking().ToListAsync();
+        }
+
+        public async Task AddWorkerExemption(Exemption exemption)
+        {
+            await _context.Exemptions.AddAsync(exemption);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddWorkerVacation(Vacation vacation)
+        {
+            await _context.Vacations.AddAsync(vacation);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Exemption>> GetWorkerAllExemptions(int workerId)
+        {
+            return await _context.Exemptions
+                .Where(x => x.WorkerId == workerId).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Vacation>> GetWorkerAllVacations(int workerId)
+        {
+            return await _context.Vacations
+                .Where(x => x.WorkerId == workerId).ToListAsync();
+        }
+
+        public bool CheckIfWorkerOnExemption(int workerId)
+        {
+            return _context.Exemptions
+                .Where(x => x.WorkerId == workerId)
+                .Where(x => x.DateFrom < DateTime.Today && x.DateTo > DateTime.Today).Any();
+        }
+
+        public bool CheckIfWorkerOnVacation(int workerId)
+        {
+            return _context.Vacations
+                .Where(x => x.WorkerId == workerId)
+                .Where(x => x.DateFrom < DateTime.Today && x.DateTo > DateTime.Today).Any();
         }
     }
 }

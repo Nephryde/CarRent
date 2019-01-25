@@ -44,9 +44,12 @@ namespace CarRent
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+            services.AddTransient<WorkerService>();
+
             services.AddScoped<IServiceService, ServiceService>();
             services.AddScoped<IWorkerService, WorkerService>();
             services.AddScoped<IGarageService, GarageService>();
+            services.AddScoped<ICustomerService, CustomerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

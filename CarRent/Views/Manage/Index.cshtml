@@ -18,12 +18,10 @@
         <div class="content">
             <div class="haha"><a asp-controller="Worker" asp-action="AddWorker">Dodaj pracownika</a></div>
             <div class="haha"><a asp-controller="Worker" asp-action="Index">Wszyscy pracownicy</a></div>
-            <div class="haha"><a asp-controller="Worker" asp-action="Index">Zwolnij pracownika</a></div>
         </div>
         <hr />
         <button class="collapsible">Klienci</button>
         <div class="content">
-            <div class="haha"><a asp-controller="Worker" asp-action="AddWorker">Dodaj klienta</a></div>
             <div class="haha"><a asp-controller="Worker" asp-action="Index">Wszyscy klienci</a></div>
             <div class="haha"><a asp-controller="Worker" asp-action="Index">Zarządzaj klientem</a></div>
         </div>
@@ -32,15 +30,13 @@
         <div class="content">
             <div class="haha"><a asp-controller="Worker" asp-action="AddWorker">Dodaj samochód</a></div>
             <div class="haha"><a asp-controller="Worker" asp-action="Index">Wszystkie samochody</a></div>
+            <div class="haha"><a asp-controller="Services" asp-action="RentCar">Wypożycz samochód</a></div>
             <div class="haha"><a asp-controller="Worker" asp-action="Index">Historia pojazdów</a></div>
         </div>
         <hr />
         <button class="collapsible">Serwis</button>
         <div class="content">
-            <div class="haha"><a asp-controller="Worker" asp-action="AddWorker">Zarządzaj usługami</a></div>
-            <div class="haha"><a asp-controller="Worker" asp-action="Index">Nie wiem</a></div>
-            <div class="haha"><a asp-controller="Worker" asp-action="Index">Nie wiem</a></div>
-        </div>
+            <div class="haha"><a asp-controller="Services" asp-action="AddService">Dodaj usługę</a></div>
     </div>
 </div>
 

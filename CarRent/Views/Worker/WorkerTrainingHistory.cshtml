@@ -1,0 +1,81 @@
+﻿@model IEnumerable<CarRent.Models.ViewModels.WorkerTrainingHistoryViewModel>
+
+@{
+    ViewData["Title"] = "WorkerTrainingHistory";
+    Layout = "~/Views/Shared/ManageLayout.cshtml";
+    decimal costSum = 0;
+    int hoursSum = 0;
+}
+<br />
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <h2>Historia szkoleń pracownika</h2>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateFrom)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateTo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TrainingName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Cost)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.NumberOfHours)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    costSum = costSum + item.Cost;
+                    hoursSum = hoursSum + item.NumberOfHours;
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateFrom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateTo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TrainingName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cost)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumberOfHours)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr class="active">
+                    <th></th>
+                    <th></th>
+                    <th>Suma</th>
+                    <td>@costSum</td>
+                    <td>@hoursSum</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div class="row" style="text-align: center;">
+    <div class="col-md-2 col-md-offset-5">
+        <input type="button" value="Powrót" class="btn btn-primary" style="font-size: 20px" onClick="history.go(-1); return false;" />
+    </div>
+</div>
+
+

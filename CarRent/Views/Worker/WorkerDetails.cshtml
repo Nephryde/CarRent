@@ -5,38 +5,64 @@
     Layout = "~/Views/Shared/ManageLayout.cshtml";
 }
 
-<h2>WorkerDetails</h2>
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <h2>Szczegóły pracownika @Model.workerDetailsViewModel.Name @Model.workerDetailsViewModel.Surname</h2>
+    </div>
+</div>
 
 <hr />
 
-<div class="row">
-    <div class="col-md-6">
-        <p>Imie: @Model.workerDetailsViewModel.Name</p>
-        <p>Nazwisko: @Model.workerDetailsViewModel.Surname</p>
-        <p>Adres: @Model.workerDetailsViewModel.Address</p>
-        <p>Miasto: @Model.workerDetailsViewModel.City</p>
-        <p>Telefon: @Model.workerDetailsViewModel.PhoneNumber</p>
-        <p>Kod pocztowy: @Model.workerDetailsViewModel.PostalCode</p>
-        <p>Kierownik: @Model.workerDetailsViewModel.BossName @Model.workerDetailsViewModel.BossSurname</p>
-        <p>Stanowisko: @Model.workerDetailsViewModel.JobName</p>
-        <p>Warsztat: @Model.workerDetailsViewModel.GarageName</p>
+<div class="row details">
+    <div class="col-md-4 col-lg-offset-3">
+        <h3>Dane osobowe:</h3>
+        <p><b>Imię:</b> &nbsp;@Model.workerDetailsViewModel.Name</p>
+        <p><b>Nazwisko:</b> &nbsp;@Model.workerDetailsViewModel.Surname</p>
+        <p><b>Adres:</b> &nbsp;@Model.workerDetailsViewModel.Address</p>
+        <p><b>Miasto:</b> &nbsp;@Model.workerDetailsViewModel.City</p>
+        <p><b>Telefon:</b> &nbsp;@Model.workerDetailsViewModel.PhoneNumber</p>
+        <p><b>Kod pocztowy:</b> &nbsp;@Model.workerDetailsViewModel.PostalCode</p>
+        <p><b>Kierownik:</b> &nbsp;@Model.workerDetailsViewModel.BossName @Model.workerDetailsViewModel.BossSurname</p>
+        <p><b>Stanowisko:</b> &nbsp;@Model.workerDetailsViewModel.JobName</p>
+        <p><b>Warsztat:</b> &nbsp;@Model.workerDetailsViewModel.GarageName</p>
     </div>
-    <div class="col-md-2">
-        <a href="#lol">Szczegóły zatrudnienia</a> &nbsp;
-        <p>Wynagrodzenie: @Model.workerEmploymentViewModel.Salary</p>
-        <p>Premia: @Model.workerEmploymentViewModel.Bonus</p>
-        <p>Data zatrudnienia: @Model.workerEmploymentViewModel.DateFrom</p>
-        <p>Data zakończenia współpracy: @Model.workerEmploymentViewModel.DateTo</p>
-        <p>Typ zatrudnienia: @Model.workerEmploymentViewModel.TypeOfEmploymentName</p>
+    <div class="col-md-4">
+        <h3>Szczegóły zatrudnienia:</h3>
+        <p><b>Wynagrodzenie:</b> &nbsp;@Model.workerEmploymentViewModel.Salary</p>
+        <p><b>Premia:</b> &nbsp;@Model.workerEmploymentViewModel.Bonus</p>
+        <p><b>Data zatrudnienia:</b> &nbsp;@Model.workerEmploymentViewModel.DateFrom.ToShortDateString()</p>
+        <p><b>Data zakończenia współpracy:</b> &nbsp;@Model.workerEmploymentViewModel.DateTo.ToShortDateString()</p>
+        <p><b>Typ zatrudnienia:</b> &nbsp;@Model.workerEmploymentViewModel.TypeOfEmploymentName</p>
     </div>
-    <div class="col-md-2">
-        <a href="#lol">Historia szkoleń</a> &nbsp; ||
-    </div>
-    <div class="col-md-2">
-        <a href="#lol">Historia zwolnień</a> &nbsp; ||
-    </div>
-
-
-
-
 </div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4 col-lg-offset-3">
+        <button type="button" class="btn btn-default">
+            <a asp-action="WorkerTrainingHistory" asp-route-workerId="@Model.workerDetailsViewModel.Id" style="font-size: 25px; color: darkgoldenrod;">Historia szkoleń</a>
+        </button>      
+    </div>
+    <div class="col-md-3">
+        <button type="button" class="btn btn-default">
+            <a asp-action="WorkerPausesHistory" asp-route-workerId="@Model.workerDetailsViewModel.Id" style="font-size: 25px; color: darkgoldenrod;">Historia zwolnień i urlopów</a>
+        </button>
+    </div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+        <input type="button" value="Wszyscy pracownicy" class="btn btn-primary" style="font-size: 20px" onclick="window.location='@Url.Action("Index", "Worker")'" />
+    </div>
+</div>
+
+<style>
+    .details {
+
+    }
+
+    .details p{
+        font-size: 17px;
+    }
+</style>

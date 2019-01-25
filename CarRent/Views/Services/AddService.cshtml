@@ -1,0 +1,114 @@
+﻿@model CarRent.Models.ViewModels.AddingNewServiceViewModel
+
+@{
+    ViewData["Title"] = "AddService";
+    Layout = "~/Views/Shared/ManageLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-2 col-md-offset-5">
+        <h2>Dodaj usługę</h2>
+    </div>
+
+</div>
+<hr />
+
+<form asp-action="AddService">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-2 col-md-offset-2">
+            <div class="form-group">
+                <label asp-for="TypeOfServiceId" class="control-label"></label>
+                <select asp-for="TypeOfServiceId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfTypesOfService, "Id", "Name"))"></select>
+                <span asp-validation-for="TypeOfServiceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="WorkerId" class="control-label"></label>
+                <select asp-for="WorkerId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfWorkers, "Id", "Surname"))"></select>
+                <span asp-validation-for="WorkerId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="BrandId" class="control-label"></label>
+                <select asp-for="BrandId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfBrands, "Id", "Name"))"></select>
+                <span asp-validation-for="BrandId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarModelName" class="control-label"></label>
+                <input asp-for="CarModelName" class="form-control" />
+                <span asp-validation-for="CarModelName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarModelYear" class="control-label"></label>
+                <input asp-for="CarModelYear" class="form-control" />
+                <span asp-validation-for="CarModelYear" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerCarRegNumber" class="control-label"></label>
+                <input asp-for="CustomerCarRegNumber" class="form-control" />
+                <span asp-validation-for="CustomerCarRegNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="CustomerName" class="control-label"></label>
+                <input asp-for="CustomerName" class="form-control" />
+                <span asp-validation-for="CustomerName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerSurname" class="control-label"></label>
+                <input asp-for="CustomerSurname" class="form-control" />
+                <span asp-validation-for="CustomerSurname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerAddress" class="control-label"></label>
+                <input asp-for="CustomerAddress" class="form-control" />
+                <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerPhone" class="control-label"></label>
+                <input asp-for="CustomerPhone" class="form-control" />
+                <span asp-validation-for="CustomerPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerCity" class="control-label"></label>
+                <input asp-for="CustomerCity" class="form-control" />
+                <span asp-validation-for="CustomerCity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerPostalCode" class="control-label"></label>
+                <input asp-for="CustomerPostalCode" class="form-control" />
+                <span asp-validation-for="CustomerPostalCode" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label asp-for="TypeOfPaymentId" class="control-label"></label>
+                <select asp-for="TypeOfPaymentId" class="form-control" asp-items="@(new SelectList(ViewBag.ListOfTypesOfPayment, "Id", "Name"))"></select>
+                <span asp-validation-for="TypeOfPaymentId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BankAccountNumber" class="control-label"></label>
+                <input asp-for="BankAccountNumber" class="form-control" />
+                <span asp-validation-for="BankAccountNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaymentDate" class="control-label"></label>
+                <input asp-for="PaymentDate" class="form-control" />
+                <span asp-validation-for="PaymentDate" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="row" style="text-align: center;">
+        <div class="col-md-2 col-md-offset-5">
+            <input type="submit" value="Dodaj" class="btn btn-primary" style="font-size: 20px; margin-right: 15px;" />
+            <input type="button" value="Anuluj" class="btn btn-primary" style="font-size: 20px" onClick="history.go(-1); return false;" />
+        </div>
+    </div>
+
+</form>
+

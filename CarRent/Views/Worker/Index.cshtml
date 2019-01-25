@@ -1,10 +1,12 @@
-﻿@model IEnumerable<CarRent.Models.ViewModels.ListWorkersViewModel>
-
+﻿@using CarRent.Data.Services
+@model IEnumerable<CarRent.Models.ViewModels.ListWorkersViewModel>
+@inject WorkerService workerService
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/ManageLayout.cshtml";
 }
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
 <div class="row">
     <div class="col-md-2 col-md-offset-5">
@@ -19,29 +21,90 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>Id pracownika</th>
                     <th>Imię i nazwisko</th>
                     <th>Warsztat</th>
+                    <th>Szkolenie</th>
+                    <th>Zwolnienie</th>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;Urlop</th>
+                    <th>Szczegóły</th>
+                    <th>Edytuj</th>
+                    <th>&nbsp;&nbsp;&nbsp;Usuń</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var worker in Model)
                 {
-                    <tr>
-                        <td>@worker.Id</td>
-                        <td>@worker.Name @worker.Surname</td>
-                        <td>@worker.GarageName</td>
-                        <td><a asp-controller="Worker" asp-action="WorkerDetails" asp-route-workerId="@worker.Id">Szczegóły</a></td>
-                        <td><a href="#a">Edytuj</a></td>
-                        <td><a href="#a">Usuń</a></td>
-                        <td><a asp-controller="Worker" asp-action="AddWorkerTraining" asp-route-workerId="@worker.Id">Szkolenie</a></td>
-                        <td><a href="#a">Zwolnienie</a>
-                    </tr>
+
+                    if (workerService.CheckIfWorkerOnExemption(worker.Id))
+                    {
+                        <tr style="background-color: #ffafaf;">
+                            <td>@worker.Id</td>
+                            <td>@worker.Name @worker.Surname</td>
+                            <td>@worker.GarageName</td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="AddWorkerTraining" asp-route-workerId="@worker.Id"><i class="fas fa-graduation-cap"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="AddWorkerExemption" asp-route-workerId="@worker.Id"><i class="fas fa-user-injured"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="AddWorkerVacation" asp-route-workerId="@worker.Id"><i class="fas fa-plane-departure"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="WorkerDetails" asp-route-workerId="@worker.Id"><i class="fas fa-info-circle"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="EditWorker" asp-route-workerId="@worker.Id"><i class="fas fa-user-edit"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="DeleteWorker" asp-route-workerId="@worker.Id"><i class="fas fa-user-times"></i></a></td>
+                        </tr>
+                    }
+                    else if (workerService.CheckIfWorkerOnVacation(worker.Id))
+                    {
+                        <tr style="background-color: #c6ffc9;">
+                            <td>@worker.Id</td>
+                            <td>@worker.Name @worker.Surname</td>
+                            <td>@worker.GarageName</td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="AddWorkerTraining" asp-route-workerId="@worker.Id"><i class="fas fa-graduation-cap"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="AddWorkerExemption" asp-route-workerId="@worker.Id"><i class="fas fa-user-injured"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="AddWorkerVacation" asp-route-workerId="@worker.Id"><i class="fas fa-plane-departure"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="WorkerDetails" asp-route-workerId="@worker.Id"><i class="fas fa-info-circle"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="EditWorker" asp-route-workerId="@worker.Id"><i class="fas fa-user-edit"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="DeleteWorker" asp-route-workerId="@worker.Id"><i class="fas fa-user-times"></i></a></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>@worker.Id</td>
+                            <td>@worker.Name @worker.Surname</td>
+                            <td>@worker.GarageName</td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="AddWorkerTraining" asp-route-workerId="@worker.Id"><i class="fas fa-graduation-cap"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="AddWorkerExemption" asp-route-workerId="@worker.Id"><i class="fas fa-user-injured"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="AddWorkerVacation" asp-route-workerId="@worker.Id"><i class="fas fa-plane-departure"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="WorkerDetails" asp-route-workerId="@worker.Id"><i class="fas fa-info-circle"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="EditWorker" asp-route-workerId="@worker.Id"><i class="fas fa-user-edit"></i></a></td>
+                            <td class="my-table"><a asp-controller="Worker" asp-action="DeleteWorker" asp-route-workerId="@worker.Id"><i class="fas fa-user-times"></i></a></td>
+                        </tr>
+                    }
                 }
             </tbody>
         </table>
     </div>
 </div>
+<hr />
+<div class="row">
+    <div class="col-md-2 col-md-offset-2">
+        <input type="button" value="Powrót" class="btn btn-primary" style="font-size: 20px" onclick="window.location='@Url.Action("Index", "Manage")'" />
+    </div>
+</div>
+
+<style>
+    .my-table{
+        padding-left: 2% !important;
+    }
+
+    .my-table i{
+        font-size: 25px;
+        color: darkgoldenrod;
+    }
+
+        .my-table i:hover {
+            color: yellow;
+        }
+
+</style>
 
 
 

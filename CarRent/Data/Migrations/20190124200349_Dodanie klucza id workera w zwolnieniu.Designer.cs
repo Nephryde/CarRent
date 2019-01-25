@@ -4,14 +4,16 @@ using CarRent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRent.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190124200349_Dodanie klucza id workera w zwolnieniu")]
+    partial class Dodaniekluczaidworkerawzwolnieniu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,7 +40,7 @@ namespace CarRent.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("BrandId");
+                    b.Property<int?>("BrandId");
 
                     b.Property<string>("Name");
 
@@ -97,9 +99,9 @@ namespace CarRent.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarModelId");
+                    b.Property<int?>("CarModelId");
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int?>("CustomerId");
 
                     b.Property<string>("RegistrationNumber");
 
@@ -223,14 +225,14 @@ namespace CarRent.Data.Migrations
 
                     b.Property<int>("ServiceId");
 
-                    b.Property<int>("TypeOfPaymentId");
+                    b.Property<int?>("TypesOfPaymentId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceId")
                         .IsUnique();
 
-                    b.HasIndex("TypeOfPaymentId");
+                    b.HasIndex("TypesOfPaymentId");
 
                     b.ToTable("Payments");
                 });
@@ -241,13 +243,13 @@ namespace CarRent.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int?>("CustomerId");
 
                     b.Property<DateTime>("DateFrom");
 
                     b.Property<DateTime>("DateTo");
 
-                    b.Property<int>("ReplacementCarId");
+                    b.Property<int?>("ReplacementCarId");
 
                     b.HasKey("Id");
 
@@ -264,9 +266,9 @@ namespace CarRent.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CarModelId");
+                    b.Property<int?>("CarModelId");
 
-                    b.Property<int>("GarageId");
+                    b.Property<int?>("GarageId");
 
                     b.Property<string>("RegistrationNumber");
 
@@ -285,17 +287,17 @@ namespace CarRent.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CustomerCarId");
+                    b.Property<int?>("CustomerCarId");
 
-                    b.Property<int>("TypeOfServiceId");
+                    b.Property<int?>("TypesOfServiceId");
 
-                    b.Property<int>("WorkerId");
+                    b.Property<int?>("WorkerId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerCarId");
 
-                    b.HasIndex("TypeOfServiceId");
+                    b.HasIndex("TypesOfServiceId");
 
                     b.HasIndex("WorkerId");
 
@@ -353,7 +355,7 @@ namespace CarRent.Data.Migrations
 
                     b.Property<DateTime>("DateTo");
 
-                    b.Property<int>("WorkerId");
+                    b.Property<int?>("WorkerId");
 
                     b.HasKey("Id");
 
@@ -566,21 +568,18 @@ namespace CarRent.Data.Migrations
                 {
                     b.HasOne("CarRent.Models.Brand", "Brand")
                         .WithMany("CarModels")
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("BrandId");
                 });
 
             modelBuilder.Entity("CarRent.Models.CustomerCar", b =>
                 {
                     b.HasOne("CarRent.Models.CarModel", "CarModel")
                         .WithMany("CustomerCars")
-                        .HasForeignKey("CarModelId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CarModelId");
 
                     b.HasOne("CarRent.Models.Customer", "Customer")
                         .WithMany("CustomerCars")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CustomerId");
                 });
 
             modelBuilder.Entity("CarRent.Models.EmployeeTraining", b =>
@@ -626,60 +625,51 @@ namespace CarRent.Data.Migrations
 
                     b.HasOne("CarRent.Models.TypeOfPayment", "TypesOfPayment")
                         .WithMany("Payments")
-                        .HasForeignKey("TypeOfPaymentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TypesOfPaymentId");
                 });
 
             modelBuilder.Entity("CarRent.Models.Rent", b =>
                 {
                     b.HasOne("CarRent.Models.Customer", "Customer")
                         .WithMany("Rents")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CustomerId");
 
                     b.HasOne("CarRent.Models.ReplacementCar", "ReplacementCar")
                         .WithMany("Rents")
-                        .HasForeignKey("ReplacementCarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ReplacementCarId");
                 });
 
             modelBuilder.Entity("CarRent.Models.ReplacementCar", b =>
                 {
                     b.HasOne("CarRent.Models.CarModel", "CarModel")
                         .WithMany("ReplacementCars")
-                        .HasForeignKey("CarModelId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CarModelId");
 
                     b.HasOne("CarRent.Models.Garage", "Garage")
                         .WithMany("ReplacementCars")
-                        .HasForeignKey("GarageId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("GarageId");
                 });
 
             modelBuilder.Entity("CarRent.Models.Service", b =>
                 {
                     b.HasOne("CarRent.Models.CustomerCar", "CustomerCar")
                         .WithMany("Services")
-                        .HasForeignKey("CustomerCarId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CustomerCarId");
 
                     b.HasOne("CarRent.Models.TypeOfService", "TypesOfService")
                         .WithMany("Services")
-                        .HasForeignKey("TypeOfServiceId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TypesOfServiceId");
 
                     b.HasOne("CarRent.Models.Worker", "Worker")
                         .WithMany()
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("WorkerId");
                 });
 
             modelBuilder.Entity("CarRent.Models.Vacation", b =>
                 {
                     b.HasOne("CarRent.Models.Worker", "Worker")
                         .WithMany("Vacations")
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("WorkerId");
                 });
 
             modelBuilder.Entity("CarRent.Models.Worker", b =>

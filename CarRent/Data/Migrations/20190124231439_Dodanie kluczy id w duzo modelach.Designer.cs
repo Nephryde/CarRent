@@ -4,14 +4,16 @@ using CarRent.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRent.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190124231439_Dodanie kluczy id w duzo modelach")]
+    partial class Dodaniekluczyidwduzomodelach
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,14 +225,14 @@ namespace CarRent.Data.Migrations
 
                     b.Property<int>("ServiceId");
 
-                    b.Property<int>("TypeOfPaymentId");
+                    b.Property<int?>("TypesOfPaymentId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceId")
                         .IsUnique();
 
-                    b.HasIndex("TypeOfPaymentId");
+                    b.HasIndex("TypesOfPaymentId");
 
                     b.ToTable("Payments");
                 });
@@ -626,8 +628,7 @@ namespace CarRent.Data.Migrations
 
                     b.HasOne("CarRent.Models.TypeOfPayment", "TypesOfPayment")
                         .WithMany("Payments")
-                        .HasForeignKey("TypeOfPaymentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TypesOfPaymentId");
                 });
 
             modelBuilder.Entity("CarRent.Models.Rent", b =>
